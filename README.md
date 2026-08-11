@@ -48,7 +48,7 @@
             background: #f7f7f7;
             padding: 15px;
             border-radius: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
@@ -60,59 +60,27 @@
             gap: 10px;
         }
 
-        .btn {
-            background: #764ba2;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1rem;
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
             font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
             width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
         }
 
-        .btn:hover {
-            background: #5a3782;
-            transform: scale(1.03);
-        }
-
-        .status {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #2e7d32;
-            display: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="card">
-        <h1>🎉 Você foi Convidado! ✨</h1>
-        <p class="subtitle">Venha comemorar o meu aniversário!</p>
-
-        <div class="info-box">
-            <div class="info-item">📅 <strong>Data:</strong> 25 de Outubro</div>
-            <div class="info-item">⏰ <strong>Horário:</strong> 19:00h</div>
-            <div class="info-item">📍 <strong>Local:</strong> Minha Casa</div>
-        </div>
-
-        <button class="btn" onclick="confirmarPresenca()">Confirmar Presença 👍</button>
-        <p id="mensagem" class="status">Presença confirmada! Te vejo lá! 🎈</p>
-    </div>
-
-    <script>
-        function confirmarPresenca() {
-            const mensagem = document.getElementById('mensagem');
-            mensagem.style.display = 'block';
-        }
-    </script>
-
-</body>
-</html>
+        .input-group input:focus {
