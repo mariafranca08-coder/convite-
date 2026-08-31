@@ -69,3 +69,154 @@
             gap: 10px;
             text-align: left;
         }
+
+        .detalhe-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #fca5a5;
+        }
+
+        .campo {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 0.85rem;
+            color: #fecaca;
+            margin-bottom: 5px;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid #7f1d1d;
+            background: #1a0505;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .campo input:focus {
+            border-color: #ef4444;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #dc2626;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #b91c1c;
+        }
+
+        .lista-presenca {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #7f1d1d;
+            text-align: left;
+        }
+
+        .lista-presenca h3 {
+            font-size: 1rem;
+            color: #fca5a5;
+            margin-bottom: 10px;
+        }
+
+        .lista-presenca ul {
+            list-style: none;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .lista-presenca li {
+            background: #1a0505;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #fecaca;
+            border: 1px solid #450a0a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="badge">Convite Especial</span>
+        <h1>Aniversário da Maria 🎉</h1>
+        <p class="desc">Você foi convidado(a) para celebrar essa data tão especial no aniversário da Maria! Venha comemorar com a gente!</p>
+
+        <div class="detalhes">
+            <div class="detalhe-item">📅 <span><strong>Data:</strong> 24 de Outubro</span></div>
+            <div class="detalhe-item">⏰ <span><strong>Horário:</strong> 19:30h</span></div>
+            <div class="detalhe-item">📍 <span><strong>Local:</strong> Salão de Festas Encantado</span></div>
+        </div>
+
+        <!-- Altere o atributo 'action' com a sua URL do Formspree se quiser receber por e-mail -->
+        <form id="form-presenca" action="https://formspree.io/f/SEU_ID_AQUI" method="POST" onsubmit="confirmar(event)">
+            <div class="campo">
+                <label for="nome">Digite seu nome para confirmar:</label>
+                <input type="text" id="nome" name="nome" placeholder="Ex: Lucas Silva" required>
+            </div>
+
+            <button type="submit">Confirmar Minha Presença</button>
+        </form>
+
+        <div class="lista-presenca">
+            <h3>Presenças Confirmadas ✨</h3>
+            <ul id="lista-nomes">
+                <!-- Os nomes salvos localmente aparecerão aqui -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", carregarNomes);
+
+        function confirmar(event) {
+            const inputNome = document.getElementById("nome");
+            const nome = inputNome.value.trim();
+
+            if (nome === "") {
+                event.preventDefault();
+                alert("Por favor, digite seu nome!");
+                return;
+            }
+
+            // Salva a confirmação no navegador do usuário
+            let convidados = JSON.parse(localStorage.getItem("convidados_maria")) || [];
+            convidados.push(nome);
+            localStorage.setItem("convidados_maria", JSON.stringify(convidados));
+
+            adicionarNaLista(nome);
+            alert("Presença confirmada com sucesso!");
+        }
+
+        function carregarNomes() {
+            let convidados = JSON.parse(localStorage.getItem("convidados_maria")) || [];
+            convidados.forEach(nome => adicionarNaLista(nome));
+        }
+
+        function adicionarNaLista(nome) {
+            const ul = document.getElementById("lista-nomes");
+            const li = document.createElement("li");
+            li.textContent = "✔️ " + nome;
+            ul.appendChild(li);
+        }
+    </script>
+
+</body>
+</html>
